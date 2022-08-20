@@ -1,0 +1,19 @@
+CC = clang++-9
+flag = -c -fPIC -o 
+
+add_.o : add.cpp add.hpp
+	$(CC) $(flag) add_.o add.cpp 
+
+mul_.o : mul.cpp mul.hpp
+	$(CC) $(flag) mul_.o mul.cpp
+
+sub_.o : sub.cpp sub.hpp
+	$(CC) $(flag) sub_.o sub.cpp
+
+div_.o : div.cpp div.hpp
+	$(CC) $(flag) div_.o div.cpp
+
+arithmetic_operation.so : add_.o mul_.o sub_.o div_.o
+	clang++-9 -shared -o arithmetic_operation.so add_.o mul_.o sub_.o div_.o
+
+# gcc -shared -W1,-soname,libmycalcso.so.1 -o libmycalcso.so.1.0.1 sum.o sub.o mul.o div.o
